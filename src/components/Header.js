@@ -4,12 +4,21 @@ import { Link } from "react-router-dom";
 import About from "./About";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 export const Header = () => {
     // let btnName= "Login";
     const [btnName,setBtnName] = useState("Login");
     const {loggedInUser} = useContext(UserContext);
     // console.log("User Data",data);
     console.log("Header render");
+
+    // subscribing to  the store using selector
+
+    const cartItems = useSelector((store) => store.cart.items );
+    console.log("cart items",cartItems);
+
+
+
     const onlineStatus= useOnlineStatus();
     useEffect(()=>{
         console.log("use effect rendered");
@@ -29,6 +38,8 @@ export const Header = () => {
                     <button className="px-4" onClick={()=> {
                         btnName == "Login" ? setBtnName("Logout"):setBtnName("Login") 
                     }}> {btnName}</button>
+                    <li className="px-4 text-nowrap font-bold"><Link to="/cart">Cart({cartItems.length} items)</Link></li>
+
                     <li className="px-4 text-nowrap font-bold">{loggedInUser}</li>
 
                 </ul>
