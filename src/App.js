@@ -8,6 +8,9 @@ import Error from "./components/Error";
 import RestaurantMenu from  "./components/RestaurantMenu"
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
  /**
   * Header
   * - Logo
@@ -36,14 +39,16 @@ import UserContext from "./utils/UserContext";
 
     },[])
     return (
-        <UserContext.Provider value={{loggedInUser:userName, setUserName}}>
-        <div className="app">
-            <Header />
-            {console.log("App Render")}
-            <Outlet />
+        <Provider store={appStore}>
+            <UserContext.Provider value={{loggedInUser:userName, setUserName}}>
+            <div className="app">
+                <Header />
+                {console.log("App Render")}
+                <Outlet />
 
-        </div>
-        </UserContext.Provider>
+            </div>
+            </UserContext.Provider>
+        </Provider>
     // Body
     // Footer
     )
@@ -68,6 +73,10 @@ import UserContext from "./utils/UserContext";
             {
                 path:"/restaurants/:resId",
                 element: <RestaurantMenu/>
+            },
+            {
+                path:"/cart",
+                element: <Cart/>
             }
 
         ],
