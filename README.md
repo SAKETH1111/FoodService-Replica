@@ -16,3 +16,13 @@ App Structure
   * - Address
   * - Contact
   */
+
+
+  # Redux ToolKit
+  
+  - Install @reduxjs/toolkit and react-redux
+  - Build our store
+  - connect our store to our app
+  - we will create a card slice ( cartSlice)
+  - we will dispatch (Action)
+  - Selector
